@@ -16,6 +16,7 @@
 		11649A4A2D677DF300BEBD7B /* FashionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A492D677DF300BEBD7B /* FashionTests.swift */; };
 		11649A542D677DF300BEBD7B /* FashionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A532D677DF300BEBD7B /* FashionUITests.swift */; };
 		11649A562D677DF300BEBD7B /* FashionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A552D677DF300BEBD7B /* FashionUITestsLaunchTests.swift */; };
+		11649A632D67833500BEBD7B /* BlogCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A622D67833500BEBD7B /* BlogCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		11649A4F2D677DF300BEBD7B /* FashionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FashionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11649A532D677DF300BEBD7B /* FashionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FashionUITests.swift; sourceTree = "<group>"; };
 		11649A552D677DF300BEBD7B /* FashionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FashionUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		11649A622D67833500BEBD7B /* BlogCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				11649A322D677DF000BEBD7B /* AppDelegate.swift */,
 				11649A342D677DF000BEBD7B /* SceneDelegate.swift */,
 				11649A362D677DF000BEBD7B /* ViewController.swift */,
+				11649A622D67833500BEBD7B /* BlogCellViewModel.swift */,
 				11649A382D677DF000BEBD7B /* Main.storyboard */,
 				11649A3B2D677DF300BEBD7B /* Assets.xcassets */,
 				11649A3D2D677DF300BEBD7B /* LaunchScreen.storyboard */,
@@ -260,6 +263,7 @@
 			files = (
 				11649A372D677DF000BEBD7B /* ViewController.swift in Sources */,
 				11649A332D677DF000BEBD7B /* AppDelegate.swift in Sources */,
+				11649A632D67833500BEBD7B /* BlogCellViewModel.swift in Sources */,
 				11649A352D677DF000BEBD7B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
