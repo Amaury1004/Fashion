@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11614A372D6890570036C601 /* FashionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11614A362D6890570036C601 /* FashionCell.swift */; };
 		11649A332D677DF000BEBD7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A322D677DF000BEBD7B /* AppDelegate.swift */; };
 		11649A352D677DF000BEBD7B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A342D677DF000BEBD7B /* SceneDelegate.swift */; };
 		11649A372D677DF000BEBD7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11649A362D677DF000BEBD7B /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11614A362D6890570036C601 /* FashionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FashionCell.swift; sourceTree = "<group>"; };
 		11649A2F2D677DF000BEBD7B /* Fashion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fashion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11649A322D677DF000BEBD7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11649A342D677DF000BEBD7B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				11649A342D677DF000BEBD7B /* SceneDelegate.swift */,
 				11649A362D677DF000BEBD7B /* ViewController.swift */,
 				11649A622D67833500BEBD7B /* BlogCellViewModel.swift */,
+				11614A362D6890570036C601 /* FashionCell.swift */,
 				11649A382D677DF000BEBD7B /* Main.storyboard */,
 				11649A3B2D677DF300BEBD7B /* Assets.xcassets */,
 				11649A3D2D677DF300BEBD7B /* LaunchScreen.storyboard */,
@@ -265,6 +268,7 @@
 				11649A332D677DF000BEBD7B /* AppDelegate.swift in Sources */,
 				11649A632D67833500BEBD7B /* BlogCellViewModel.swift in Sources */,
 				11649A352D677DF000BEBD7B /* SceneDelegate.swift in Sources */,
+				11614A372D6890570036C601 /* FashionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
