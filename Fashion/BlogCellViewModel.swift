@@ -1,17 +1,32 @@
 import UIKit
 
-struct BlogCellViewModel {
-    let image: String
+protocol CellViewModelProtocol {}
+
+struct BlogCellViewModel: CellViewModelProtocol {
+    let image: String?
     let title: String
     let description: String
     let time: String
-    
-    
 }
+
+struct BlogCellViewTitle: CellViewModelProtocol {
+    let title: String
+}
+struct BlogCellViewScroll: CellViewModelProtocol {
+    let title: String
+}
+struct BlogCellViewLoad: CellViewModelProtocol{
+    let title: String
+}
+struct BlogCellViewSocial: CellViewModelProtocol {
+    let icon: String?
+    let contacts: String?
+}
+
 
 extension BlogCellViewModel {
     static func mockData() -> [BlogCellViewModel] {
-        return [BlogCellViewModel(image: "image1.jpg",
+        return [BlogCellViewModel(image: "image1",
                                   title: "2021 STYLE GUIDE: THE BIGGEST FALL TRENDS",
                                   description: "The excitement of fall fashion is here and I’m already loving some of the trend forecasts",
                                   time:"4 days ago" ),
@@ -40,15 +55,55 @@ extension BlogCellViewModel {
                                   description:"The excitement of fall fashion is here and I’m already loving some of the trend forecasts" ,
                                   time: "10/10/2021"),
                         
-                
-                
-        
-        
-        
-        
-        
         ]
     
     }
 }
+
+extension BlogCellViewTitle {
+    static func setupTitle() -> BlogCellViewTitle {
+        return BlogCellViewTitle(title: "BLOG")
+    }
+}
+
+extension BlogCellViewScroll {
+    static func setupScroll() -> [String] {
+        return [
+            "Fashion",
+            "Promo",
+            "Policy",
+            "Lookbook",
+            "Sale",
+            "Стартовать",
+            "За Вара",
+            "Срочно",
+            "!!!!!!!"
+        ]
+    }
+}
+
+extension BlogCellViewLoad {
+    static func setupTLoad() -> BlogCellViewLoad {
+        return BlogCellViewLoad(title: "LOAD MORE")
+    }
+}
+    
+    extension BlogCellViewSocial {
+        static func setupSocial() -> [BlogCellViewSocial]{
+            return [BlogCellViewSocial(icon: "camera", contacts: nil),
+                    BlogCellViewSocial(icon: "play.rectangle", contacts: nil ),
+                    BlogCellViewSocial(icon: "bird", contacts: nil),
+                    BlogCellViewSocial(icon: nil, contacts: "support@openui.design /n+60 825 876/n08:00 - 22:00 - Everyda"),
+                    BlogCellViewSocial(icon: nil, contacts: "Copyright© OpenUI All Rights Reserved.")]
+        }
+    }
+
+enum BlogSection {
+    case title(BlogCellViewTitle)
+    case categories([BlogCellViewScroll])
+    case posts([BlogCellViewModel])
+    case loadMore(BlogCellViewLoad)
+    case socialLinks([BlogCellViewSocial])
+}
+
 
