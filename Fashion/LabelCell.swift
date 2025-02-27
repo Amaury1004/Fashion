@@ -52,8 +52,8 @@ class LabelCell: UITableViewCell  {
             label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
             separator.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
-            separator.leadingAnchor.constraint(equalTo: label.leadingAnchor, constant: -48),
-            separator.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 48),
+            separator.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 120),
+            separator.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -120),
             separator.heightAnchor.constraint(equalToConstant: 1)
             
         

@@ -20,7 +20,7 @@ struct BlogCellViewLoad: CellViewModelProtocol{
 }
 struct BlogCellViewSocial: CellViewModelProtocol {
     let icon: String?
-    let contacts: String?
+    
 }
 
 
@@ -88,13 +88,12 @@ extension BlogCellViewLoad {
     }
 }
     
-    extension BlogCellViewSocial {
-        static func setupSocial() -> [BlogCellViewSocial]{
-            return [BlogCellViewSocial(icon: "camera", contacts: nil),
-                    BlogCellViewSocial(icon: "play.rectangle", contacts: nil ),
-                    BlogCellViewSocial(icon: "bird", contacts: nil),
-                    BlogCellViewSocial(icon: nil, contacts: "support@openui.design /n+60 825 876/n08:00 - 22:00 - Everyda"),
-                    BlogCellViewSocial(icon: nil, contacts: "Copyright© OpenUI All Rights Reserved.")]
+extension BlogCellViewSocial {
+    static func setupSocial() -> [BlogCellViewSocial] {
+        return [BlogCellViewSocial(icon: "xmark"),
+                BlogCellViewSocial(icon: "camera"),
+                BlogCellViewSocial(icon: "play.rectangle"),
+                ]
         }
     }
 

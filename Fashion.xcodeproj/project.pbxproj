@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1104B3E12D70891000A70EF0 /* SocialIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104B3E02D70891000A70EF0 /* SocialIconCell.swift */; };
 		112214442D6DDE4D004E0ED5 /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112214432D6DDE4D004E0ED5 /* Separator.swift */; };
 		112214462D6E043C004E0ED5 /* ScrollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112214452D6E043C004E0ED5 /* ScrollCell.swift */; };
 		1147D3732D6F2A1400E2C974 /* BlogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1147D3722D6F2A1400E2C974 /* BlogCell.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1104B3E02D70891000A70EF0 /* SocialIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialIconCell.swift; sourceTree = "<group>"; };
 		112214432D6DDE4D004E0ED5 /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		112214452D6E043C004E0ED5 /* ScrollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollCell.swift; sourceTree = "<group>"; };
 		1147D3722D6F2A1400E2C974 /* BlogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogCell.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				112214452D6E043C004E0ED5 /* ScrollCell.swift */,
 				1147D3722D6F2A1400E2C974 /* BlogCell.swift */,
 				1147D3742D6F584C00E2C974 /* ButtonCell.swift */,
+				1104B3E02D70891000A70EF0 /* SocialIconCell.swift */,
 				11649A382D677DF000BEBD7B /* Main.storyboard */,
 				11649A3B2D677DF300BEBD7B /* Assets.xcassets */,
 				11649A3D2D677DF300BEBD7B /* LaunchScreen.storyboard */,
@@ -281,6 +284,7 @@
 				1147D3752D6F584C00E2C974 /* ButtonCell.swift in Sources */,
 				11649A332D677DF000BEBD7B /* AppDelegate.swift in Sources */,
 				11649A632D67833500BEBD7B /* BlogCellViewModel.swift in Sources */,
+				1104B3E12D70891000A70EF0 /* SocialIconCell.swift in Sources */,
 				11649A352D677DF000BEBD7B /* SceneDelegate.swift in Sources */,
 				1147D3732D6F2A1400E2C974 /* BlogCell.swift in Sources */,
 				11614A372D6890570036C601 /* LabelCell.swift in Sources */,

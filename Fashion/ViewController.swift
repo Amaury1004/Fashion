@@ -18,6 +18,9 @@ class ViewController: UIViewController {
         tableView.register(ScrollCell.self, forCellReuseIdentifier: "ScrollCell")
         tableView.register(BlogCell.self, forCellReuseIdentifier: "BlogCell")
         tableView.register(ButtonCell.self, forCellReuseIdentifier: "ButtonCell")
+        tableView.register(SocialIconCell.self, forCellReuseIdentifier: "SocialIconCell")
+        tableView.allowsSelection = false
+
            
         
         NSLayoutConstraint.activate([
@@ -58,12 +61,15 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate {}
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+}
 
 extension ViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,6 +77,7 @@ extension ViewController: UITableViewDataSource {
             return  BlogCellViewModel.mockData().count
         }
         return 1
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -85,6 +92,9 @@ extension ViewController: UITableViewDataSource {
         }
         else if indexPath.section == 3 {
             return 54
+        }
+        else if indexPath.section == 4 {
+            return 340
         }
         return 50
     }
@@ -113,6 +123,12 @@ extension ViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonCell
             cell.configure(model: viewModel)
             return cell
+        case 4 :
+            let viewModel = BlogCellViewSocial.setupSocial()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SocialIconCell", for: indexPath) as! SocialIconCell
+            cell.configure(models: viewModel)
+            return cell
+            
         default:
             return UITableViewCell()
         }
