@@ -62,6 +62,7 @@ class ScrollCell: UITableViewCell {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+        
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.systemFont(ofSize: 20, weight: .light),
                             .foregroundColor: UIColor.black]

@@ -10,6 +10,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupTopPanel()
         
+        view.backgroundColor = .black
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -20,6 +21,8 @@ class ViewController: UIViewController {
         tableView.register(ButtonCell.self, forCellReuseIdentifier: "ButtonCell")
         tableView.register(SocialIconCell.self, forCellReuseIdentifier: "SocialIconCell")
         tableView.allowsSelection = false
+        tableView.separatorStyle = .none
+
 
            
         
@@ -57,6 +60,12 @@ class ViewController: UIViewController {
             button.tintColor = .lightGray
         }
         
+        let mainLabel = UIImageView()
+        mainLabel.image = UIImage(named: "Logo")
+        
+        
+        self.navigationItem.titleView = mainLabel
+        
         
     }
 }
@@ -74,7 +83,9 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
+            tableView.allowsSelection = true
             return  BlogCellViewModel.mockData().count
+            
         }
         return 1
         
@@ -126,7 +137,7 @@ extension ViewController: UITableViewDataSource {
         case 4 :
             let viewModel = BlogCellViewSocial.setupSocial()
             let cell = tableView.dequeueReusableCell(withIdentifier: "SocialIconCell", for: indexPath) as! SocialIconCell
-            cell.configure(models: viewModel)
+            cell.configure(models: viewModel, viewController: self)
             return cell
             
         default:

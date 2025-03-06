@@ -9,6 +9,7 @@ class BlogCell: UITableViewCell {
     let descriptionLabel = UILabel()
     let time = UILabel()
     
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -58,14 +59,31 @@ class BlogCell: UITableViewCell {
         imageSetup.image = UIImage(named: model.image!)
         title.text = model.title
         descriptionLabel.text = model.description
-        time.text = model.time
+        time.text = "12/12/2002"
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 18),
+            .strokeColor: UIColor.white,
+            .strokeWidth: -2,
+            .foregroundColor: UIColor.black
+        ]
+
+        let attributedString = NSAttributedString(string: model.title, attributes: attributes)
+        
         
         descriptionLabel.numberOfLines = 5
         descriptionLabel.lineBreakMode = .byTruncatingTail
-        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        descriptionLabel.font = UIFont(name: "TenorSans-Regular", size: 14)
+        descriptionLabel.textColor = .gray
+        
         
         title.numberOfLines = 3
         title.lineBreakMode = .byTruncatingTail
+        title.font = UIFont(name: "TenorSans-Regular", size: 18)
+        title.textColor = .darkGray
+        
+        
+        title.attributedText = attributedString
         
         
         time.textColor = .lightGray

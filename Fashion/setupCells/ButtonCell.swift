@@ -5,10 +5,19 @@ class ButtonCell: UITableViewCell {
     
     let buttonFrame = UIButton(type: .system)
     var model: BlogCellViewLoad?
+    let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
+    
+    
+    
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupConstraints()
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight:.light, scale:.default)
+        let plusImage = UIImage(systemName: "plus")?.withConfiguration(largeConfig)
+        buttonFrame.setImage(plusImage, for: .normal)
+        buttonFrame.semanticContentAttribute = .forceRightToLeft
     }
     
     required init?(coder: NSCoder) {
@@ -20,6 +29,7 @@ class ButtonCell: UITableViewCell {
         
         contentView.addSubview(buttonFrame)
         
+        
         buttonFrame.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -30,6 +40,8 @@ class ButtonCell: UITableViewCell {
             buttonFrame.widthAnchor.constraint(equalToConstant: 211),
             buttonFrame.heightAnchor.constraint(equalToConstant: 48)
             
+            
+            
         ])
     }
     
@@ -38,9 +50,10 @@ class ButtonCell: UITableViewCell {
         
         buttonFrame.setTitle(model.title, for: .normal)
         buttonFrame.tintColor = .black
-        buttonFrame.layer.borderWidth = 2
+        buttonFrame.layer.borderWidth = 1
         buttonFrame.layer.borderColor = UIColor.lightGray.cgColor
-        buttonFrame.layer.cornerRadius = 8
+        
+        
         
         setupConstraints()
         

@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  Fashion
-//
-//  Created by MakOSim on 20.02.2025.
-//
 
 import UIKit
 

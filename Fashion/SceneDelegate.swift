@@ -17,13 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let window = UIWindow(windowScene: windowScene)
             
-            // Получаем ваш текущий ViewController
-            let initialViewController = ViewController()  // Ваш ViewController
+            let initialViewController = ViewController()
             
-            // Создаем UINavigationController и устанавливаем его корневым
             let navigationController = UINavigationController(rootViewController: initialViewController)
             
-            // Устанавливаем UINavigationController как корневой контроллер
             window.rootViewController = navigationController
             self.window = window
             window.makeKeyAndVisible()

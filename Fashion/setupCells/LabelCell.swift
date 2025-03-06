@@ -36,6 +36,7 @@ class LabelCell: UITableViewCell  {
         self.model = viewModel
         
         label.text = viewModel.title
+        label.font = UIFont(name: "TenorSans-Regular", size: 18)
         
         
     }

@@ -18,7 +18,7 @@ class CustomSeparator: UIView {
         addSubview(lineView)
         
         let diamondView = UIView()
-        diamondView.backgroundColor = .clear
+        diamondView.backgroundColor = .white
         diamondView.layer.borderColor = UIColor.lightGray.cgColor
         diamondView.layer.borderWidth = 1
         diamondView.translatesAutoresizingMaskIntoConstraints = false
