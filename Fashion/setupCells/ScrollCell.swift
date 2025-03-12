@@ -9,14 +9,12 @@ class ScrollCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Добавляем scroll и настраиваем его
         contentView.addSubview(scroll)
         scroll.showsHorizontalScrollIndicator = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
         
         setConstraints()
         
-        // Настроим stackView
         setupStackView()
     }
     
@@ -46,7 +44,7 @@ class ScrollCell: UITableViewCell {
             stackView.topAnchor.constraint(equalTo: scroll.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: scroll.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: scroll.leadingAnchor, constant: 32),
-            stackView.trailingAnchor.constraint(equalTo: scroll.trailingAnchor)
+            stackView.trailingAnchor.constraint(equalTo: scroll.trailingAnchor, constant: -32)
         ])
     }
     

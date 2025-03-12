@@ -17,15 +17,12 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(LabelCell.self, forCellReuseIdentifier: "LabelCell")
         tableView.register(ScrollCell.self, forCellReuseIdentifier: "ScrollCell")
-        tableView.register(BlogCell.self, forCellReuseIdentifier: "BlogCell")
+        tableView.register(BlogsCell.self, forCellReuseIdentifier: "BlogsCell")
         tableView.register(ButtonCell.self, forCellReuseIdentifier: "ButtonCell")
         tableView.register(SocialIconCell.self, forCellReuseIdentifier: "SocialIconCell")
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.separatorStyle = .none
 
-
-           
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -62,87 +59,74 @@ class ViewController: UIViewController {
         
         let mainLabel = UIImageView()
         mainLabel.image = UIImage(named: "Logo")
-        
-        
         self.navigationItem.titleView = mainLabel
-        
-        
     }
 }
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 2 else { return }
+        
+        let blogVC = BlogController()
+        navigationController?.pushViewController(blogVC, animated: true)
     }
 }
 
 extension ViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        Section.allCases.count
+        // Хз откуда взять нормальное значение секций...
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            tableView.allowsSelection = true
             return  BlogCellViewModel.mockData().count
             
         }
         return 1
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if  indexPath.section == 0 {
-            return 50
-        }
-        else if indexPath.section == 1 {
-            return 64
-        }
-        else if indexPath.section == 2 {
-            return 181
-        }
-        else if indexPath.section == 3 {
-            return 54
-        }
-        else if indexPath.section == 4 {
-            return 340
-        }
-        return 50
+        return HeightForRow(rawValue: indexPath.section)?.height ?? HeightForRow.defaultHeight
     }
-    
-    
+        
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell
+        
         switch indexPath.section {
         case 0:
             let viewModel = BlogCellViewTitle.setupTitle()
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! LabelCell
-            cell.configure(with: viewModel)
-            return cell
+            let labelCell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as! LabelCell
+            labelCell.configure(with: viewModel)
+            cell = labelCell
         case 1:
             let viewModel = BlogCellViewScroll.setupScroll()
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ScrollCell", for: indexPath) as! ScrollCell
-            cell.configure(model: viewModel)
-            return cell
+            let scrollCell = tableView.dequeueReusableCell(withIdentifier: "ScrollCell", for: indexPath) as! ScrollCell
+            scrollCell.configure(model: viewModel)
+            cell = scrollCell
         case 2:
             let viewModel = BlogCellViewModel.mockData()
             let blogItem = viewModel[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BlogCell", for: indexPath) as! BlogCell
-            cell.configure(model: blogItem)
-            return cell
+            let blogCell = tableView.dequeueReusableCell(withIdentifier: "BlogsCell", for: indexPath) as! BlogsCell
+            blogCell.configure(model: blogItem)
+            cell = blogCell
         case 3:
             let viewModel = BlogCellViewLoad.setupTLoad()
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonCell
-            cell.configure(model: viewModel)
-            return cell
-        case 4 :
+            let buttonCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonCell
+            buttonCell.configure(model: viewModel)
+            cell = buttonCell
+        case 4:
             let viewModel = BlogCellViewSocial.setupSocial()
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SocialIconCell", for: indexPath) as! SocialIconCell
-            cell.configure(models: viewModel, viewController: self)
-            return cell
-            
+            let socialCell = tableView.dequeueReusableCell(withIdentifier: "SocialIconCell", for: indexPath) as! SocialIconCell
+            socialCell.configure(models: viewModel, viewController: self)
+            cell = socialCell
         default:
-            return UITableViewCell()
+            cell = UITableViewCell()
         }
+        
+        cell.selectionStyle = (indexPath.section == 2) ? .default : .none
+        return cell
     }
         
 }

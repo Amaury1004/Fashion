@@ -7,10 +7,6 @@ class ButtonCell: UITableViewCell {
     var model: BlogCellViewLoad?
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
     
-    
-    
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

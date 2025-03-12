@@ -1,14 +1,12 @@
 import UIKit
 
-
-class BlogCell: UITableViewCell {
+class BlogsCell: UITableViewCell {
     
     var model: BlogCellViewModel?
     let imageSetup = UIImageView()
     let title = UILabel()
     let descriptionLabel = UILabel()
     let time = UILabel()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,8 +23,7 @@ class BlogCell: UITableViewCell {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(time)
         
-        
-        imageSetup.translatesAutoresizingMaskIntoConstraints = false
+                imageSetup.translatesAutoresizingMaskIntoConstraints = false
         title.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         time.translatesAutoresizingMaskIntoConstraints = false
@@ -49,8 +46,7 @@ class BlogCell: UITableViewCell {
             time.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 3),
             time.leadingAnchor.constraint(equalTo: imageSetup.trailingAnchor, constant: 12),
             time.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -16),
-        
-        ])
+                ])
     }
     
     func configure(model: BlogCellViewModel) {
@@ -59,7 +55,11 @@ class BlogCell: UITableViewCell {
         imageSetup.image = UIImage(named: model.image!)
         title.text = model.title
         descriptionLabel.text = model.description
-        time.text = "12/12/2002"
+        
+        let formaters = DateFormatter()
+        formaters.dateFormat = "dd-MM-yyyy"
+        formaters.locale = Locale(identifier: "uk_UA")
+        time.text = formaters.string(from: model.time)
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 18),
@@ -70,27 +70,21 @@ class BlogCell: UITableViewCell {
 
         let attributedString = NSAttributedString(string: model.title, attributes: attributes)
         
-        
         descriptionLabel.numberOfLines = 5
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.font = UIFont(name: "TenorSans-Regular", size: 14)
         descriptionLabel.textColor = .gray
-        
         
         title.numberOfLines = 3
         title.lineBreakMode = .byTruncatingTail
         title.font = UIFont(name: "TenorSans-Regular", size: 18)
         title.textColor = .darkGray
         
-        
         title.attributedText = attributedString
-        
         
         time.textColor = .lightGray
         time.font = UIFont.systemFont(ofSize: 12)
-        
-        
+                
         setConstraints()
-        
     }
 }
