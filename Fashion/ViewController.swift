@@ -3,12 +3,19 @@ import UIKit
 class ViewController: UIViewController {
     
     let tableView: UITableView = .init(frame: .zero, style: .plain)
+    let loadMore =  ButtonCell()
+    
+    var blogData: [BlogCellViewModel] = []
+    
+    weak var delegate: ReloadDateDelegate?
    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTopPanel()
+        
+        blogData = BlogCellViewModel.randomBlog()
         
         view.backgroundColor = .black
         view.addSubview(tableView)
@@ -67,7 +74,9 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section == 2 else { return }
         
+        let selectedBlog = blogData[indexPath.row]
         let blogVC = BlogController()
+        blogVC.selectedBlog = selectedBlog 
         navigationController?.pushViewController(blogVC, animated: true)
     }
 }
@@ -81,7 +90,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            return  BlogCellViewModel.mockData().count
+            return  blogData.count
             
         }
         return 1
@@ -106,7 +115,7 @@ extension ViewController: UITableViewDataSource {
             scrollCell.configure(model: viewModel)
             cell = scrollCell
         case 2:
-            let viewModel = BlogCellViewModel.mockData()
+            let viewModel = blogData
             let blogItem = viewModel[indexPath.row]
             let blogCell = tableView.dequeueReusableCell(withIdentifier: "BlogsCell", for: indexPath) as! BlogsCell
             blogCell.configure(model: blogItem)
@@ -115,7 +124,9 @@ extension ViewController: UITableViewDataSource {
             let viewModel = BlogCellViewLoad.setupTLoad()
             let buttonCell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! ButtonCell
             buttonCell.configure(model: viewModel)
+            buttonCell.delegate = self
             cell = buttonCell
+            
         case 4:
             let viewModel = BlogCellViewSocial.setupSocial()
             let socialCell = tableView.dequeueReusableCell(withIdentifier: "SocialIconCell", for: indexPath) as! SocialIconCell
@@ -129,4 +140,12 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
         
+}
+
+extension ViewController: ReloadDateDelegate {
+    func reloadData() {
+        blogData.append(contentsOf: BlogCellViewModel.randomBlog())
+        tableView.reloadData()
+    }
+    
 }

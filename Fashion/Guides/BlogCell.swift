@@ -1,22 +1,24 @@
-import UIKit 
+import UIKit
 
 class BlogCell: UITableViewCell {
     
-    private let memImage = UIImageView()
-    private let label = UILabel()
-    private let descriptionLabel = UILabel()
-    private let descriptionLabel2 = UILabel()
-    private let time = UILabel()
-    private let imageSetup = UIImageView()
+    let label = UILabel()
+    let descriptionLabel = UILabel()
+    let descriptionLabel2 = UILabel()
+    let time = UILabel()
+    let scrol = UIScrollView()
+    let pageControl = UIPageControl()
+    var images: [String] = []
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        [memImage, label, descriptionLabel, descriptionLabel2, time, imageSetup].forEach {
+        [label, descriptionLabel, descriptionLabel2, time, scrol, pageControl].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
         }
         
+        setupScrollView()
         setupConstraints()
     }
     
@@ -26,25 +28,27 @@ class BlogCell: UITableViewCell {
     
     func configure(model: BlogCellViewModel) {
         label.text = model.title
+        label.lineBreakMode = .byWordWrapping
         descriptionLabel.text = model.description
+        descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel2.text = model.description2
+        descriptionLabel2.lineBreakMode = .byWordWrapping
         let formaters = DateFormatter()
         formaters.dateFormat = "dd-MM-yyyy"
         formaters.locale = Locale(identifier: "uk_UA")
         time.text = ("Posted by OpenFashion |   ") + formaters.string(from: model.time)
         
-        
-        descriptionLabel.numberOfLines = 13
+        descriptionLabel.numberOfLines = 0
         descriptionLabel.lineBreakMode = .byTruncatingTail
         descriptionLabel.font = UIFont(name: "TenorSans-Regular", size: 14)
         descriptionLabel.textColor = .gray
         
-        descriptionLabel2.numberOfLines = 13
+        descriptionLabel2.numberOfLines = 0
         descriptionLabel2.lineBreakMode = .byTruncatingTail
         descriptionLabel2.font = UIFont(name: "TenorSans-Regular", size: 14)
         descriptionLabel2.textColor = .gray
         
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         label.font = UIFont(name: "TenorSans-Regular", size: 18)
         label.textColor = .darkGray
@@ -52,38 +56,74 @@ class BlogCell: UITableViewCell {
         time.textColor = .lightGray
         time.font = UIFont.systemFont(ofSize: 12)
         
-        imageSetup.image = UIImage(named: model.image ?? "defaultImage")
-        memImage.image = UIImage(named: "surv")
+        if let imageSet = model.imageSet {
+            images = imageSet
+            setupImageScrollView()
+        }
     }
     
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            memImage.topAnchor.constraint(equalTo: contentView.topAnchor),
-            memImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            memImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            memImage.heightAnchor.constraint(equalToConstant: 221),
+     func setupScrollView() {
+        scrol.isPagingEnabled = true
+        scrol.showsHorizontalScrollIndicator = false
+        scrol.delegate = self
+    }
+    
+     func setupImageScrollView() {
+        scrol.subviews.forEach { $0.removeFromSuperview() }
+        
+        for (index, imageName) in images.enumerated() {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: imageName)
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            scrol.addSubview(imageView)
             
-            label.topAnchor.constraint(equalTo: memImage.bottomAnchor, constant: 9),
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.heightAnchor.constraint(equalTo: scrol.heightAnchor).isActive = true
+            imageView.widthAnchor.constraint(equalTo: scrol.widthAnchor).isActive = true
+            imageView.leadingAnchor.constraint(equalTo: scrol.leadingAnchor, constant: CGFloat(index) * scrol.frame.width).isActive = true
+        }
+        
+        scrol.contentSize = CGSize(width: CGFloat(images.count) * scrol.frame.width, height: scrol.frame.height)
+        
+        pageControl.numberOfPages = images.count
+        pageControl.currentPage = 0
+    }
+    
+     func setupConstraints() {
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            label.heightAnchor.constraint(equalToConstant: 40),
             
-            descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 9),
+            descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            imageSetup.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
-            imageSetup.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageSetup.heightAnchor.constraint(equalToConstant: (400/1.5)),
-            imageSetup.widthAnchor.constraint(equalToConstant: (342/1.5)),
+            scrol.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            scrol.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            scrol.heightAnchor.constraint(equalToConstant: 200),
+            scrol.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             
-            descriptionLabel2.topAnchor.constraint(equalTo: imageSetup.bottomAnchor, constant: 9),
+            descriptionLabel2.topAnchor.constraint(equalTo: scrol.bottomAnchor, constant: 10),
             descriptionLabel2.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionLabel2.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            time.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 9),
+            time.topAnchor.constraint(equalTo: descriptionLabel2.bottomAnchor, constant: 10),
             time.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            time.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            time.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            
+            pageControl.topAnchor.constraint(equalTo: scrol.bottomAnchor, constant: 10),
+            pageControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
     }
 }
 
+extension BlogCell: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
+        pageControl.currentPage = page
+    }
+}

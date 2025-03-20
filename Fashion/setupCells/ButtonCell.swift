@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ReloadDateDelegate: AnyObject {
+    func reloadData()
+}
+
 class ButtonCell: UITableViewCell {
     
     
@@ -7,11 +11,19 @@ class ButtonCell: UITableViewCell {
     var model: BlogCellViewLoad?
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
     
+    
+    
+    weak var delegate: ReloadDateDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight:.light, scale:.default)
         let plusImage = UIImage(systemName: "plus")?.withConfiguration(largeConfig)
+        
+        buttonFrame.addTarget(self, action: #selector(reloadingDate), for: .touchUpInside)
+        
+        
         buttonFrame.setImage(plusImage, for: .normal)
         buttonFrame.semanticContentAttribute = .forceRightToLeft
     }
@@ -55,5 +67,8 @@ class ButtonCell: UITableViewCell {
         
         
         
+    }
+    @objc func reloadingDate(sender: UIButton) {
+        delegate?.reloadData()
     }
 }

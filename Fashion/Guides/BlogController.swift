@@ -1,14 +1,16 @@
 import UIKit
 
 class BlogController: UIViewController {
-    
     let tableView = UITableView()
     
+    var selectedBlog: BlogCellViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -32,10 +34,9 @@ extension BlogController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let viewModel = BlogCellViewModel.mockData()
-            let blogItem = viewModel[indexPath.row]
+            guard let selectedBlog = selectedBlog else { return UITableViewCell() }
             let blogCell = tableView.dequeueReusableCell(withIdentifier: "BlogCell", for: indexPath) as! BlogCell
-            blogCell.configure(model: blogItem)
+            blogCell.configure(model: selectedBlog)
             return blogCell
         } else {
             let viewModel = BlogCellViewSocial.setupSocial()
@@ -44,6 +45,7 @@ extension BlogController: UITableViewDataSource {
             return socialCell
         }
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.row == 0 ? 1050 : 360

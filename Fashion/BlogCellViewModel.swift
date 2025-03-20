@@ -8,6 +8,7 @@ struct BlogCellViewModel: CellViewModelProtocol {
     let description: String
     let time: Date
     let description2: String?
+    let imageSet: [String]?
 }
 
 struct DateModel {
@@ -37,6 +38,7 @@ enum Section: Int, CaseIterable {
     case blogs
     case button
     case social
+    
 }
 
 
@@ -65,37 +67,58 @@ enum contentGuideBlog {
 extension BlogCellViewModel {
     static func mockData() -> [BlogCellViewModel] {
         return [BlogCellViewModel(image: "image1",
-                                  title: "2021 STYLE GUIDE: THE BIGGEST FALL TRENDS",
-                                  description: "The excitement of fall fashion is here and I’m already loving some of the trend forecasts",
+                                  title: "World of Warcraft: Best Transmog Sets for Warriors",
+                                  description: "A Warrior on the frontlines should be able to instill hope among their comrades",
                                   time: DateModel.post1,
-                                  description2: "Ротация Сурв охотника в первую очередь заключается в правильном «фокус менеджменте» и управлении стаками баффа Наконечник копья. Вам нужно стараться генерировать оба этих ресурса как можно чаще, при этом избегая их избытка (когда концентрации становится 100 или когда у вас 3 стака Наконечник копья, а вы решили прожать еще раз Команда 'Взять!', 4 стака не будет и вы лишь потеряете один лишний бафф)."),
+                                  description2: "The armor itself features a wrap-around undersuit with muscle toning, giving the impression of micro-plates made to fit the player’s figure. The leg guards and gauntlets are more significant than the rest of the piece, as expected in Warcraft design tradition. Setting this armor apart are its pauldrons and headpiece, which seem to have plate-like protrusions that give the impression of wings. In turn, a Warrior can wear this armor to give the ambiance of a formally-trained knight — knowledgeable enough in martial affairs to be skilled in combat, but not too holy to be a Paladin",
+                                  imageSet: ["war1","war2", "war3"]),
                 BlogCellViewModel(image: "image2.jpg" ,
                                   title: "3 PAIRS OF DENIM YOU WON’T BELIEVE" ,
                                   description:"The excitement of fall fashion is here and I’m already loving some of the trend forecasts" ,
-                                  time: DateModel.post2, description2: "" ),
+                                  time: DateModel.post2, description2: "", imageSet: nil ),
                         
                 BlogCellViewModel(image:"image3.jpg" ,
                                   title:"5 FALL LOOKS I’M LOVING" ,
                                   description:"The excitement of fall fashion is here and I’m already loving some of the trend forecasts" ,
-                                  time: DateModel.post3, description2: ""),
+                                  time: DateModel.post3, description2: "", imageSet: nil),
                         
                 BlogCellViewModel(image:"image4.jpg" ,
                                   title:"5 FALL BOOT TRENDS YOU NEED TO TRY" ,
                                   description:"The excitement of fall fashion is here and I’m already loving some of the trend forecasts" ,
-                                  time: DateModel.post4, description2: ""),
+                                  time: DateModel.post4, description2: "", imageSet: nil),
                         
                 BlogCellViewModel(image:"image5.jpg" ,
                                   title:"2021 STYLE GUIDE: THE BIGGEST FALL TRENDS" ,
                                   description:"The excitement of fall fashion is here and I’m already loving some of the trend forecasts" ,
-                                  time: DateModel.post5, description2: ""),
+                                  time: DateModel.post5, description2: "", imageSet: nil),
                         
                 BlogCellViewModel(image:"image6.jpg" ,
                                   title: "3 PAIRS OF DENIM YOU WON’T BELIEVE",
                                   description:"The excitement of fall fashion is here and I’m already loving some of the trend forecasts" ,
-                                  time: DateModel.post6, description2: ""),
+                                  time: DateModel.post6, description2: "", imageSet: nil),
                         
         ]
     
+    }
+}
+
+extension BlogCellViewModel {
+    static func randomBlog() -> [BlogCellViewModel] {
+        let count = Int.random(in: 2...4)
+        let blogModel = mockData()
+        var result: [BlogCellViewModel] = []
+        
+        guard !blogModel.isEmpty else {
+            return result
+        }
+        
+        (0..<count).forEach { _ in
+            if let randomElement = blogModel.randomElement() {
+                result.append(randomElement)
+            }
+        }
+        
+        return result
     }
 }
 
